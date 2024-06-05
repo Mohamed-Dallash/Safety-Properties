@@ -1,0 +1,9 @@
+digraph G {
+  0 [shape=octagon, color=red, label="0 : forall rate_check . collide_rate(rate_check) -> rate_check = ''true''"]
+  1 [shape=box, label="1 : collide_rate(rate_check) -> rate_check = ''true''"]
+  2 [shape=box, label="2 : collide_rate(rate_check)"]
+  3 [shape=box, label="3 : rate_check = ''true''"]
+  1 -> 2
+  1 -> 3
+  0 -> 1
+}

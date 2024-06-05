@@ -1,0 +1,17 @@
+initiate
+    P: double := 0.01
+    AccMax: double := 5.4
+    AccBrakeMax: double := 9.8
+    AccBrakeMin: double := 2.9
+
+on detectLeadingVehicle(vEgo: double, vLeading: double, distance: double)
+    t0: double := vEgo * P
+    t1: double := 0.5 * AccMax * P*P 
+    t2: double := vEgo + P * AccBrakeMax
+    t3: double := 2.0 * AccBrakeMin
+    t4: double := vLeading * vLeading
+    t5: double := 2.0 * AccBrakeMax
+
+    SD: double := t0 + t1 + (t2 * t2)/t3 - t4/t5
+    distanceCheck: bool := distance >= SD 
+    output checkSafeDistance(distanceCheck)

@@ -1,0 +1,10 @@
+initiate
+    no_of_collisions: int := 0
+
+
+on collide(vehicle_id: int, miles_driven: double)
+    no_of_collisions: int := no_of_collisions + 1
+    threshold_collision: double := 0.00005191 
+    collision_rate: double := no_of_collisions / miles_driven 
+    rate_check: bool := collision_rate <= threshold_collision
+    output collide_rate(rate_check)

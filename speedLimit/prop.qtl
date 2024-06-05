@@ -1,0 +1,5 @@
+pred isCarSpeedBelowLimit(carSpeed, roadSpeed) = carSpeed <= roadSpeed
+
+prop VehiclespeedCheck :
+	forall vEgo. forall roadSpeed .
+		checkVehicleSpeedBelowLimit(vEgo, roadSpeed) -> isCarSpeedBelowLimit(vEgo, roadSpeed)

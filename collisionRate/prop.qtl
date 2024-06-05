@@ -1,0 +1,3 @@
+prop collisionRateCheck :
+	forall rate_check .
+		collide_rate(rate_check) -> rate_check = "true"

@@ -1,0 +1,3 @@
+prop safeDistanceCheck :
+	forall distanceCheck .
+		checkSafeDistance(distanceCheck) -> distanceCheck = "true"
