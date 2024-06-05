@@ -1401,17 +1401,19 @@ object PreMonitor extends PreMonitorTrait {
   }
 	private var no_of_collisions: Int = 0
 	private var prev_no_of_collisions: Int = 0
-	private var vehicle_id: Int = 0
-	private var miles_driven: Double = 0.0
-	private var threshold_collision: Double = 0.0
-	private var collision_rate: Double = 0.0
+	private var collision: Int = 0
+	private var km_driven: Double = 0.0
 	private var rate_check: Boolean = false
+	private var collision_rate: Double = 0.0
+	private var threshold_collision: Double = 0.0
+	private var miles_driven: Double = 0.0
 
 
-	private def on_collide(vehicle_id: Int, miles_driven: Double): Unit = {
-		this.no_of_collisions = no_of_collisions + 1
+	private def on_collide(collision: Int, km_driven: Double): Unit = {
+		this.no_of_collisions = no_of_collisions + collision
 		this.threshold_collision = 0.00005191 
-		this.collision_rate = no_of_collisions / miles_driven 
+		this.miles_driven = km_driven/1.609
+		this.collision_rate = no_of_collisions / miles_driven
 		this.rate_check = collision_rate <= threshold_collision
 	}
 
@@ -1426,14 +1428,14 @@ object PreMonitor extends PreMonitorTrait {
 			case "collide" => {
 				if (params.length != 2) throw new IllegalArgumentException("Incorrect number of parameters for event collide")
 				Try(params(0).toString.trim.toInt) match {
-					case Success(value) => this.vehicle_id = value
+					case Success(value) => this.collision = value
 					case Failure(e) => println(s"Failed to convert to Int: $e")
 				}
 				Try(params(1).toString.trim.toDouble) match {
-					case Success(value) => this.miles_driven = value
+					case Success(value) => this.km_driven = value
 					case Failure(e) => println(s"Failed to convert to Double: $e")
 				}
-				on_collide(vehicle_id, miles_driven)
+				on_collide(collision, km_driven)
 				event = collide_output()
 			}
 			case _ => event = List(event_name, params.toList)
