@@ -1558,8 +1558,8 @@ object TraceMonitor {
 
     //println("%d",moni_.lineNr)
     closeResultFile()
-    println("RESULT:");
-    println(res);
+    // println("RESULT:");
+    // println(res);
     return res;
   }
 
